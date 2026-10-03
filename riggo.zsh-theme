@@ -25,7 +25,7 @@ riggo_git_prompt() {
     clr="$GIT_CLEAN_CLR"
     mark="✓"
   fi
-  print -rn -- "[${GIT_CLR}git:${clr}${branch:l} ${mark}] "
+  print -rn -- "[${GIT_CLR}git:${clr}${branch:l} ${mark}${RESET_CLR}] "
 }
 
 riggo_git_status() {
@@ -77,7 +77,8 @@ riggo_precmd() {
     elapsed=$(( EPOCHREALTIME - riggo_cmd_start ))
     unset riggo_cmd_start
     if (( elapsed >= MIN_DURATION )); then
-      local dur=$(riggo_format_duration $elapsed)
+      local dur
+      dur=$(riggo_format_duration $elapsed)
       riggo_timer="${TIMER_CLR}${dur}%f"
       riggo_timer_len=${#dur}
     fi
